@@ -28,11 +28,11 @@ private:
 
 	sf::View m_HudView;
 
-	sf::Texture m_BackgroundTexture;
-	sf::Sprite  m_BackgroundSprite;
+	const sf::Texture& m_BackgroundTexture;
+	sf::Sprite m_BackgroundSprite;
 
-	bool m_Playing	   = false;
-	bool m_SplitScreen = false;
+	bool m_IsPlaying		   = false;
+	bool m_IsSplitScreenMode   = false;
 	bool m_IsPlayerOneTheFocus = true;
 
 	float m_TimeRemainingInSeconds = 10;
