@@ -40,4 +40,33 @@ void PlayableCharacter::update(float delta)
 	{
 		m_Position.y += m_Gravity * delta;
 	}
+
+	sf::FloatRect characterBounds = getGlobalBounds();
+
+	m_FeetBounds.position.x = characterBounds.position.x + 3;
+	m_FeetBounds.position.y = characterBounds.position.y + characterBounds.size.y - 1;
+	m_FeetBounds.size.x = characterBounds.size.x - 6;
+	m_FeetBounds.size.y = 1;
+
+	m_HeadBounds.position.x = characterBounds.position.x;
+	m_HeadBounds.position.y = characterBounds.position.y + (characterBounds.size.y * .3f);
+	m_HeadBounds.size.x = characterBounds.size.x;
+	m_HeadBounds.size.y = 1;
+
+	m_RightBounds.position.x = characterBounds.position.x +  characterBounds.size.x - 2;
+	m_RightBounds.position.y = characterBounds.position.y + (characterBounds.size.y * .35f);
+	m_RightBounds.size.x = 1;
+	m_RightBounds.size.y = characterBounds.size.y * .3f;
+
+	m_RightBounds.position.x = characterBounds.position.x;
+	m_RightBounds.position.y = characterBounds.position.y + (characterBounds.size.y * .5f);
+	m_RightBounds.size.x = 1;
+	m_RightBounds.size.y = characterBounds.size.y * .3f;
+
+	m_Sprite.setPosition(m_Position);
+}
+
+sf::FloatRect PlayableCharacter::getFeetBounds()
+{
+	return sf::FloatRect();
 }
