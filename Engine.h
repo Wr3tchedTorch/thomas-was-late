@@ -7,11 +7,17 @@
 #include "TextureHolder.h"
 #include "Bob.h"
 #include "Thomas.h"
+#include "LevelManager.h"
 
 class Engine
 {
 private:
-	TextureHolder m_TextureHolder;
+	TextureHolder m_TextureHolderSingleton;
+	
+	LevelManager	m_LevelManager;
+	sf::VertexArray m_VertexArrayLevel;
+	sf::Texture		m_TextureTiles;
+	int** m_ArrayLevel = NULL;
 
 	const int TILE_SIZE			= 50;
 	const int VERTICES_PER_TILE = 6;
@@ -49,6 +55,7 @@ private:
 	void draw();
 	void input();
 
+	void loadLevel();
 public:
 	Engine();
 	void run();
