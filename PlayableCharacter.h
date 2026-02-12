@@ -30,6 +30,7 @@ private:
 	sf::FloatRect m_RightBounds;
 
 public:
+	PlayableCharacter(const sf::Texture& texture);
 	void spawn(sf::Vector2f startPosition, float gravity);
 
 	virtual bool handleInput() = 0;

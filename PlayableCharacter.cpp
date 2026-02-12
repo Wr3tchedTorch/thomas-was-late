@@ -1,5 +1,11 @@
 #include "PlayableCharacter.h"
 
+PlayableCharacter::PlayableCharacter(const sf::Texture& texture) :
+	m_Sprite(texture),
+	m_Texture(texture)
+{
+}
+
 void PlayableCharacter::spawn(sf::Vector2f startPosition, float gravity)
 {
 	m_Position = startPosition;
