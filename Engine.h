@@ -5,6 +5,8 @@
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/System/Time.hpp>
 #include "TextureHolder.h"
+#include "Bob.h"
+#include "Thomas.h"
 
 class Engine
 {
@@ -27,6 +29,9 @@ private:
 	sf::View m_BackgroundRightView;
 
 	sf::View m_HudView;
+
+	Bob	   m_Bob;
+	Thomas m_Thomas;
 
 	const sf::Texture& m_BackgroundTexture;
 	sf::Sprite m_BackgroundSprite;

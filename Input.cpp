@@ -24,4 +24,14 @@ void Engine::input()
 			}
 		}
 	}
+
+	if (m_Bob.handleInput())
+	{
+		// Jump sound goes here!
+	}
+
+	if (m_Thomas.handleInput())
+	{
+		// Jump sound goes here!
+	}
 }
