@@ -20,8 +20,8 @@ public:
 	float getTimeLimit();
 	sf::Vector2f getStartPosition();
 
-	int** nextLevel(sf::VertexArray& levelVertexArray);
-
 	sf::Vector2i getLevelSize();
 	int getCurrentLevel();
+
+	int** nextLevel(sf::VertexArray& levelVertexArray);
 };

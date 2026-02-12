@@ -5,6 +5,26 @@
 #include <fstream>
 #include "TextureHolder.h"
 
+float LevelManager::getTimeLimit()
+{
+	return m_BaseTimeLimit * m_TimeModifier;
+}
+
+sf::Vector2f LevelManager::getStartPosition()
+{
+	return m_StartPosition;
+}
+
+sf::Vector2i LevelManager::getLevelSize()
+{
+	return m_LevelSize;
+}
+
+int LevelManager::getCurrentLevel()
+{
+	return m_CurrentLevel;
+}
+
 int** LevelManager::nextLevel(sf::VertexArray& levelVertexArray)
 {
 	m_LevelSize = { 0, 0 };
@@ -109,3 +129,4 @@ int** LevelManager::nextLevel(sf::VertexArray& levelVertexArray)
 
 	return arrayLevel;
 }
+
