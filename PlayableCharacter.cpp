@@ -3,9 +3,74 @@
 void PlayableCharacter::spawn(sf::Vector2f startPosition, float gravity)
 {
 	m_Position = startPosition;
-	m_Gravity  = gravity;
+	m_Gravity = gravity;
 
 	m_Sprite.setPosition(m_Position);
+}
+
+sf::FloatRect PlayableCharacter::getGlobalBounds()
+{
+	return m_Sprite.getGlobalBounds();
+}
+
+sf::FloatRect PlayableCharacter::getFeetBounds()
+{
+	return m_FeetBounds;
+}
+
+sf::FloatRect PlayableCharacter::getHeadBounds()
+{
+	return m_HeadBounds;
+}
+
+sf::FloatRect PlayableCharacter::getLeftBounds()
+{
+	return m_LeftBounds;
+}
+
+sf::FloatRect PlayableCharacter::getRightBounds()
+{
+	return m_RightBounds;
+}
+
+sf::Vector2f PlayableCharacter::getCenter()
+{
+	sf::Vector2f center({ 
+		m_Position.x + getGlobalBounds().size.x / 2,
+		m_Position.y + getGlobalBounds().size.y / 2,
+	});
+
+	return center;
+}
+
+const sf::Sprite& PlayableCharacter::getSprite()
+{
+	return m_Sprite;
+}
+
+void PlayableCharacter::stopLeft(float position)
+{
+	m_Position.x = position + getGlobalBounds().size.x;
+	m_Sprite.setPosition(m_Position);
+}
+
+void PlayableCharacter::stopRight(float position)
+{
+	m_Position.x = position - getGlobalBounds().size.x;
+	m_Sprite.setPosition(m_Position);
+}
+
+void PlayableCharacter::stopFalling(float position)
+{
+	m_Position.y = position - getGlobalBounds().size.y;
+	m_IsFalling  = false;
+	m_Sprite.setPosition(m_Position);
+}
+
+void PlayableCharacter::stopJumping()
+{
+	m_IsJumping = false;
+	m_IsFalling = true;
 }
 
 void PlayableCharacter::update(float delta)
@@ -58,15 +123,10 @@ void PlayableCharacter::update(float delta)
 	m_RightBounds.size.x = 1;
 	m_RightBounds.size.y = characterBounds.size.y * .3f;
 
-	m_RightBounds.position.x = characterBounds.position.x;
-	m_RightBounds.position.y = characterBounds.position.y + (characterBounds.size.y * .5f);
-	m_RightBounds.size.x = 1;
-	m_RightBounds.size.y = characterBounds.size.y * .3f;
+	m_LeftBounds.position.x = characterBounds.position.x;
+	m_LeftBounds.position.y = characterBounds.position.y + (characterBounds.size.y * .5f);
+	m_LeftBounds.size.x = 1;
+	m_LeftBounds.size.y = characterBounds.size.y * .3f;
 
 	m_Sprite.setPosition(m_Position);
-}
-
-sf::FloatRect PlayableCharacter::getFeetBounds()
-{
-	return sf::FloatRect();
 }
