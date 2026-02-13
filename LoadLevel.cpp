@@ -14,8 +14,8 @@ void Engine::loadLevel()
 
 	m_TimeRemainingInSeconds = m_LevelManager.getTimeLimit();
 
-	m_Thomas.spawn(m_LevelManager.getStartPosition(), 0);
-	m_Bob.spawn(m_LevelManager.getStartPosition(), 0);
+	m_Thomas.spawn(m_LevelManager.getStartPosition(), GRAVITY);
+	m_Bob.spawn(m_LevelManager.getStartPosition(), GRAVITY);
 
 	m_NewLevelRequired = false;
 }

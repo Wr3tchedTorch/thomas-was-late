@@ -12,6 +12,23 @@ void Engine::update(float delta)
 		m_Thomas.update(delta);
 		m_Bob.update(delta);
 
+		bool hasThomasReachedGoal = detectCollisions(m_Thomas);
+		bool hasBobReachedGoal	  = detectCollisions(m_Bob);
+
+		if (hasThomasReachedGoal && hasBobReachedGoal)
+		{
+			m_NewLevelRequired = true;
+		}
+
+		if (m_Thomas.getFeetBounds().findIntersection(m_Bob.getHeadBounds()))
+		{
+			m_Thomas.stopFalling(m_Bob.getHeadBounds().position.y);
+		}
+		else if (m_Bob.getFeetBounds().findIntersection(m_Thomas.getHeadBounds()))
+		{
+			m_Bob.stopFalling(m_Thomas.getHeadBounds().position.y);
+		}
+
 		m_TimeRemainingInSeconds -= delta;
 
 		if (m_TimeRemainingInSeconds <= 0)
