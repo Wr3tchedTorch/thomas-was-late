@@ -15,7 +15,7 @@ private:
 
 public:
 	const int TILE_SIZE			= 50;
-	const int VERTICES_PER_TILE = 50;
+	const int VERTICES_PER_TILE = 6;
 
 	float getTimeLimit();
 	sf::Vector2f getStartPosition();

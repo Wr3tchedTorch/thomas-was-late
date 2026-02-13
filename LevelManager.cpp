@@ -3,6 +3,7 @@
 #include <SFML/Audio.hpp>
 #include <sstream>
 #include <fstream>
+#include <iostream>
 #include "TextureHolder.h"
 
 float LevelManager::getTimeLimit()
@@ -42,12 +43,15 @@ int** LevelManager::nextLevel(sf::VertexArray& levelVertexArray)
 	case 1:
 		m_StartPosition = { 100, 100 };
 		m_BaseTimeLimit = 30.0f;
+		break;
 	case 2:
 		m_StartPosition = { 100, 3600 };
 		m_BaseTimeLimit = 100.0f;
+		break;
 	case 3:
 		m_StartPosition = { 1250, 0 };
 		m_BaseTimeLimit = 30.0f;
+		break;
 	case 4:
 		m_StartPosition = { 50, 200 };
 		m_BaseTimeLimit = 50.0f;
@@ -88,40 +92,40 @@ int** LevelManager::nextLevel(sf::VertexArray& levelVertexArray)
 	levelVertexArray.setPrimitiveType(sf::PrimitiveType::Triangles);
 	levelVertexArray.resize(static_cast<size_t>(m_LevelSize.x) * m_LevelSize.y * VERTICES_PER_TILE);
 
+	const float tileSizeFloat = static_cast<float>(TILE_SIZE);
+
 	size_t currentVertex = 0;
 	for (int y = 0; y < m_LevelSize.y; ++y)
 	{
 		for (int x = 0; x < m_LevelSize.x; ++x)
 		{
-			sf::Vector2f topLeftPosition({ x * TILE_SIZE, y * TILE_SIZE });			
-			
-			sf::Vector2f topRightPosition(topLeftPosition);
-			topRightPosition.x += TILE_SIZE;
-			
-			sf::Vector2f bottomLeftPosition(topLeftPosition);
-			topRightPosition.y += TILE_SIZE;
+			float left   = x    * tileSizeFloat;
+			float right  = left + tileSizeFloat;
+			float top    = y    * tileSizeFloat;
+			float bottom = top  + tileSizeFloat;
 
-			sf::Vector2f bottomRightPosition(topLeftPosition);
-			topRightPosition.x += TILE_SIZE;
-			topRightPosition.y += TILE_SIZE;
+			levelVertexArray[currentVertex + 0].position = { left,  top };
+			levelVertexArray[currentVertex + 1].position = { left,  bottom };
+			levelVertexArray[currentVertex + 2].position = { right, top };
 
-			levelVertexArray[currentVertex    ].position = topLeftPosition;
-			levelVertexArray[currentVertex + 1].position = topRightPosition;
-			levelVertexArray[currentVertex + 2].position = bottomLeftPosition;
-			
-			levelVertexArray[currentVertex + 3].position = topRightPosition;
-			levelVertexArray[currentVertex + 4].position = bottomRightPosition;
-			levelVertexArray[currentVertex + 5].position = bottomLeftPosition;
+			levelVertexArray[currentVertex + 3].position = { right, top };
+			levelVertexArray[currentVertex + 4].position = { right, bottom };
+			levelVertexArray[currentVertex + 5].position = { left,  bottom };
 
-			int verticalTextureOffset = arrayLevel[y][x] * TILE_SIZE;
+			float verticalTextureOffset = static_cast<float>(arrayLevel[y][x]) * tileSizeFloat;
 
-			levelVertexArray[currentVertex].texCoords	  = { 0,	     verticalTextureOffset };
-			levelVertexArray[currentVertex + 1].texCoords = { TILE_SIZE, verticalTextureOffset};
-			levelVertexArray[currentVertex + 2].texCoords = { 0,		 verticalTextureOffset + TILE_SIZE };
+			left   = 0;
+			right  = left + tileSizeFloat;
+			top    = verticalTextureOffset;
+			bottom = top  + tileSizeFloat;
 
-			levelVertexArray[currentVertex + 3].texCoords = { TILE_SIZE, verticalTextureOffset };
-			levelVertexArray[currentVertex + 4].texCoords = { TILE_SIZE, verticalTextureOffset + TILE_SIZE};
-			levelVertexArray[currentVertex + 5].texCoords = { 0,		 verticalTextureOffset + TILE_SIZE };
+			levelVertexArray[currentVertex + 0].texCoords = { left,  top };
+			levelVertexArray[currentVertex + 1].texCoords = { left,  bottom };
+			levelVertexArray[currentVertex + 2].texCoords = { right, top };
+
+			levelVertexArray[currentVertex + 3].texCoords = { right, top };
+			levelVertexArray[currentVertex + 4].texCoords = { right, bottom };
+			levelVertexArray[currentVertex + 5].texCoords = { left,  bottom };
 
 			currentVertex += VERTICES_PER_TILE;
 		}

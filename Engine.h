@@ -14,9 +14,9 @@ class Engine
 private:
 	TextureHolder m_TextureHolderSingleton;
 	
-	LevelManager	m_LevelManager;
-	sf::VertexArray m_VertexArrayLevel;
-	sf::Texture		m_TextureTiles;
+	LevelManager	   m_LevelManager;
+	sf::VertexArray	   m_VertexArrayLevel;
+	const sf::Texture& m_TextureTiles;
 	int** m_ArrayLevel = NULL;
 
 	const int TILE_SIZE			= 50;

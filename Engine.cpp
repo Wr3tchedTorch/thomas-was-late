@@ -2,6 +2,7 @@
 
 Engine::Engine() : 
 	m_BackgroundTexture(TextureHolder::GetTexture("graphics/background.png")),
+	m_TextureTiles(TextureHolder::GetTexture("graphics/tiles_sheet.png")),
 	m_BackgroundSprite(m_BackgroundTexture)
 {
 	 sf::VideoMode videoMode = sf::VideoMode::getDesktopMode();
@@ -14,6 +15,7 @@ Engine::Engine() :
 	 screenCenter.y /= 2;
 
 	 m_MainView.setSize(screenResolution);
+	 m_MainView.zoom(3.0f);
 
 	 m_BackgroundMainView.setSize(screenResolution);	 
 	 m_BackgroundMainView.setCenter(screenCenter);
@@ -23,6 +25,7 @@ Engine::Engine() :
 
 	 m_BackgroundLeftView.setViewport( { {0.001f, 0.001f}, {0.498f, 0.998f} });
 	 m_BackgroundRightView.setViewport({ {0.5f  , 0.001f}, {0.499f, 0.998f} });
+
 }
 
 void Engine::run()

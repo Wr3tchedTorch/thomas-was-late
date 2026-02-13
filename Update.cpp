@@ -4,11 +4,7 @@ void Engine::update(float delta)
 {
 	if (m_NewLevelRequired)
 	{
-		m_Thomas.spawn({ 0, 0 }, GRAVITY);
-		m_Bob.spawn({ 0, 0 }, GRAVITY);
-
-		m_NewLevelRequired = false;
-		m_TimeRemainingInSeconds = 10;
+		loadLevel();
 	}
 
 	if (m_IsPlaying)
