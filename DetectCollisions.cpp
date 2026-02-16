@@ -46,6 +46,8 @@ bool Engine::detectCollisions(PlayableCharacter& character)
 				continue;
 			}
 
+			reachedGoal = BLOCK_INDEX == 4;
+
 			block.position = { 
 				x * TILE_SIZE_FLOAT, 
 				y * TILE_SIZE_FLOAT 
@@ -87,8 +89,6 @@ bool Engine::detectCollisions(PlayableCharacter& character)
 					character.stopLeft(block.position.x);
 				}
 			}
-
-			reachedGoal = BLOCK_INDEX == 4;
 		}
 	}
 
