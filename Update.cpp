@@ -1,4 +1,5 @@
 #include "Engine.h"
+#include <iostream>
 
 void Engine::update(float delta)
 {
@@ -15,8 +16,11 @@ void Engine::update(float delta)
 		bool hasThomasReachedGoal = detectCollisions(m_Thomas);
 		bool hasBobReachedGoal	  = detectCollisions(m_Bob);
 
+		std::cout << std::format("\nhasThomasReachedGoal: {}, hasBobReachedGoal: {}", hasThomasReachedGoal, hasBobReachedGoal);
 		if (hasThomasReachedGoal && hasBobReachedGoal)
 		{
+			m_SoundManager.playReachGoal();
+
 			m_NewLevelRequired = true;
 		}
 
@@ -34,6 +38,27 @@ void Engine::update(float delta)
 		if (m_TimeRemainingInSeconds <= 0)
 		{
 			m_NewLevelRequired = true;
+		}
+	}
+
+	if (m_FireEmitters.size() > 0)
+	{
+		for (auto& it : m_FireEmitters)
+		{
+			float x = it.x;
+			float y = it.y;
+
+			sf::FloatRect emitterRange(
+				{
+					{x - 250, y - 250},
+					{500, 500}
+				}
+			);
+
+			if (emitterRange.findIntersection(m_Thomas.getGlobalBounds()))
+			{
+				m_SoundManager.playFire({ x, y }, m_Thomas.getCenter());
+			}
 		}
 	}
 

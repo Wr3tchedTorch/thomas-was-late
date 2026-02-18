@@ -27,11 +27,11 @@ void Engine::input()
 
 	if (m_Bob.handleInput())
 	{
-		// Jump sound goes here!
+		m_SoundManager.playJump();
 	}
 
 	if (m_Thomas.handleInput())
 	{
-		// Jump sound goes here!
+		m_SoundManager.playJump();
 	}
 }

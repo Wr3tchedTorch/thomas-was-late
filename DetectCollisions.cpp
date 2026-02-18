@@ -2,8 +2,6 @@
 
 bool Engine::detectCollisions(PlayableCharacter& character)
 {
-	bool reachedGoal = false;
-
 	sf::FloatRect detectionArea = character.getGlobalBounds();
 
 	const float TILE_SIZE_FLOAT = static_cast<float>(TILE_SIZE);
@@ -35,18 +33,12 @@ bool Engine::detectCollisions(PlayableCharacter& character)
 	endX   = std::min(endX, m_LevelManager.getLevelSize().x);
 	endY   = std::min(endY, m_LevelManager.getLevelSize().y);
 
+	bool reachedGoal = false;
 	for (int x = startX; x < endX; ++x)
 	{
 		for (int y = startY; y < endY; ++y)
 		{
 			const int BLOCK_INDEX = m_ArrayLevel[y][x];
-
-			if (BLOCK_INDEX == 0)
-			{
-				continue;
-			}
-
-			reachedGoal = BLOCK_INDEX == 4;
 
 			block.position = { 
 				x * TILE_SIZE_FLOAT, 
@@ -60,10 +52,12 @@ bool Engine::detectCollisions(PlayableCharacter& character)
 				if (BLOCK_INDEX == 2)
 				{
 					// lava sound
+					m_SoundManager.playFallInFire();
 				}
 				else
 				{
 					// water sound
+					m_SoundManager.playFallInWater();
 				}
 
 				continue;
@@ -88,6 +82,11 @@ bool Engine::detectCollisions(PlayableCharacter& character)
 				{
 					character.stopLeft(block.position.x);
 				}
+			}
+
+			if (BLOCK_INDEX == 4)
+			{
+				reachedGoal = true;
 			}
 		}
 	}

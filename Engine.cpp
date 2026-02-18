@@ -7,7 +7,7 @@ Engine::Engine() :
 {
 	 sf::VideoMode videoMode = sf::VideoMode::getDesktopMode();
 	 
-	 m_Window.create(videoMode, "Thomas was late by Eric", sf::State::Fullscreen);
+	 m_Window.create(videoMode, "Thomas was late by Eric", sf::State::Windowed);
 
 	 sf::Vector2f screenResolution(videoMode.size);
 	 sf::Vector2f screenCenter(screenResolution);

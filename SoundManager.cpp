@@ -15,13 +15,14 @@ SoundManager::SoundManager() :
 	int distance	= 150;
 	int attenuation = 15;
 
-	for (sf::Sound& fireSound : m_FireSounds)
+	for (int i = 0; i < 3; i++)
 	{
+		sf::Sound fireSound(m_FireBuffer);
 		fireSound.setMinDistance(distance);
-
 		fireSound.setAttenuation(attenuation);
-
 		fireSound.setLooping(true);
+
+		m_FireSounds.push_back(fireSound);
 	}
 }
 

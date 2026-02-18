@@ -8,12 +8,14 @@
 #include "Bob.h"
 #include "Thomas.h"
 #include "LevelManager.h"
+#include "SoundManager.h"
 
 class Engine
 {
 private:
 	TextureHolder m_TextureHolderSingleton;
 	
+	SoundManager	   m_SoundManager;
 	LevelManager	   m_LevelManager;
 	sf::VertexArray	   m_VertexArrayLevel;
 	const sf::Texture& m_TextureTiles;
@@ -51,12 +53,16 @@ private:
 
 	bool m_NewLevelRequired = true;
 
+	std::vector<sf::Vector2f> m_FireEmitters;
+
 	void update(float delta);
 	void draw();
 	void input();
 
 	void loadLevel();
 	bool detectCollisions(PlayableCharacter& character);
+
+	void populateEmitters(std::vector<sf::Vector2f>& soundEmitters, int** arrayLevel);
 public:
 	Engine();
 	void run();
