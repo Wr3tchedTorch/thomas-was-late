@@ -35,7 +35,17 @@ void Engine::draw()
 		m_Window.draw(m_Thomas.getSprite());
 		m_Window.draw(m_Bob.getSprite());
 	}
+	
 	m_Window.setView(m_HudView);
+	if (m_IsPlaying)
+	{
+		m_Window.draw(m_Hud.getTime());
+		m_Window.draw(m_Hud.getLevel());
+	}
+	else
+	{
+		m_Window.draw(m_Hud.getMessage());
+	}
 
 	m_Window.display();
 }

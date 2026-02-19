@@ -9,11 +9,16 @@
 #include "Thomas.h"
 #include "LevelManager.h"
 #include "SoundManager.h"
+#include "HUD.h"
 
 class Engine
 {
 private:
 	TextureHolder m_TextureHolderSingleton;
+
+	HUD m_Hud;
+	int m_FramesSinceLastHudUpdate;
+	int m_FramesDelayPerHudUpdate;
 	
 	SoundManager	   m_SoundManager;
 	LevelManager	   m_LevelManager;

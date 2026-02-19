@@ -6,16 +6,17 @@ HUD::HUD() :
 	m_LevelText(m_Font),
 	m_TimeText(m_Font)
 {
-	sf::Vector2u resolution = sf::VideoMode::getDesktopMode().size;
+	sf::Vector2f resolution(sf::VideoMode::getDesktopMode().size);
 
 	m_StartText.setCharacterSize(100);
+	m_StartText.setString("Press `Enter` to play!");
 	sf::FloatRect startTextbounds = m_StartText.getLocalBounds();
 	m_StartText.setOrigin(
 		{
 			startTextbounds.size.x / 2,
 			startTextbounds.size.y / 2
 		});
-	m_StartText.setString("Press `Enter` to play!");
+	m_StartText.setPosition({ resolution.x/2, resolution.y/2 });
 
 	m_LevelText.setCharacterSize(75);
 	m_LevelText.setPosition({ 25, 0 });
@@ -33,7 +34,7 @@ sf::Text HUD::getMessage()
 
 sf::Text HUD::getLevel()
 {
-	return m_LevelText
+	return m_LevelText;
 }
 
 sf::Text HUD::getTime()

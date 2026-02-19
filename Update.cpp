@@ -62,6 +62,17 @@ void Engine::update(float delta)
 		}
 	}
 
+	m_FramesSinceLastHudUpdate++;
+	if (m_FramesSinceLastHudUpdate > m_FramesDelayPerHudUpdate)
+	{
+		m_FramesSinceLastHudUpdate = 0;
+
+		std::string levelString = std::format("Level: {}", m_LevelManager.getCurrentLevel());
+		m_Hud.setLevel(levelString);
+
+		m_Hud.setTime(std::format("{:.2}", m_TimeRemainingInSeconds));
+	}
+
 	if (m_IsSplitScreenMode)
 	{
 		m_LeftView.setCenter(m_Thomas.getCenter());
