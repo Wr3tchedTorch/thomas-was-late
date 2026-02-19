@@ -35,6 +35,26 @@ void ParticleSystem::update(float delta)
 	}
 }
 
+void ParticleSystem::emitParticles(sf::Vector2f startPosition)
+{
+	m_IsRunning = true;
+	m_Duration  = 2;
+
+	int currentVertex = 0;
+	for (auto& particle : m_Particles)
+	{		
+		m_Vertices[currentVertex++].color = sf::Color::Yellow;
+
+		particle.setPosition(startPosition);
+	}
+}
+
+bool ParticleSystem::isRunning() const
+{
+	return m_IsRunning;
+}
+
 void ParticleSystem::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
+	target.draw(m_Vertices, states);
 }
