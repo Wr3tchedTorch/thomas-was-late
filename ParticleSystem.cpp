@@ -1,4 +1,5 @@
 #include "ParticleSystem.h"
+#include <numbers>
 
 void ParticleSystem::init(int count)
 {
@@ -8,7 +9,7 @@ void ParticleSystem::init(int count)
 	for (int i = 0; i < count; ++i)
 	{
 		srand(time(0) * i);
-		float angle = (rand() % 360) * 3.14f / 180.0f;
+		float angle = (rand() % 360) * std::numbers::pi / 180.0f;
 		float speed = (rand() % 600) + 600;
 
 		sf::Vector2f direction({cos(angle) * speed, sin(angle) * speed});
