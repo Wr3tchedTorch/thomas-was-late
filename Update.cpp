@@ -16,7 +16,6 @@ void Engine::update(float delta)
 		bool hasThomasReachedGoal = detectCollisions(m_Thomas);
 		bool hasBobReachedGoal	  = detectCollisions(m_Bob);
 
-		std::cout << std::format("\nhasThomasReachedGoal: {}, hasBobReachedGoal: {}", hasThomasReachedGoal, hasBobReachedGoal);
 		if (hasThomasReachedGoal && hasBobReachedGoal)
 		{
 			m_SoundManager.playReachGoal();
@@ -71,6 +70,11 @@ void Engine::update(float delta)
 		m_Hud.setLevel(levelString);
 
 		m_Hud.setTime(std::format("{:.2}", m_TimeRemainingInSeconds));
+	}
+
+	if (m_ParticleSystem.isRunning())
+	{
+		m_ParticleSystem.update(delta);
 	}
 
 	if (m_IsSplitScreenMode)

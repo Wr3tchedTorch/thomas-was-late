@@ -5,10 +5,20 @@ Engine::Engine() :
 	m_BackgroundTexture(TextureHolder::GetTexture("graphics/background.png")),
 	m_TextureTiles(TextureHolder::GetTexture("graphics/tiles_sheet.png")),
 	m_BackgroundSprite(m_BackgroundTexture)
-{
+{		
 	 sf::VideoMode videoMode = sf::VideoMode::getDesktopMode();
 	 
 	 m_Window.create(videoMode, "Thomas was late by Eric", sf::State::Fullscreen);
+
+	 if (sf::Shader::isAvailable())
+	 {
+		 m_RippleShader.loadFromFile("shaders/vertShader.vert", "shaders/rippleShader.frag");
+	 }
+	 else
+	 {
+		 m_Window.close();
+		 return;
+	 }
 
 	 sf::Vector2f screenResolution(videoMode.size);
 	 
@@ -30,6 +40,7 @@ Engine::Engine() :
 	 m_BackgroundLeftView.setViewport( { {0.001f, 0.001f}, {0.498f, 0.998f} });
 	 m_BackgroundRightView.setViewport({ {0.5f  , 0.001f}, {0.499f, 0.998f} });
 
+	 m_ParticleSystem.init(1000);
 }
 
 void Engine::run()
@@ -39,6 +50,7 @@ void Engine::run()
 	{
 		sf::Time deltaTime = clock.restart();
 		m_GameTimeTotal += deltaTime;
+		std::cout << m_GameTimeTotal.asSeconds() << "\n";
 
 		float delta = deltaTime.asSeconds();
 

@@ -10,6 +10,7 @@
 #include "LevelManager.h"
 #include "SoundManager.h"
 #include "HUD.h"
+#include "ParticleSystem.h"
 
 class Engine
 {
@@ -19,12 +20,15 @@ private:
 	HUD m_Hud;
 	int m_FramesSinceLastHudUpdate;
 	int m_FramesDelayPerHudUpdate;
-	
+
+	ParticleSystem	   m_ParticleSystem;
 	SoundManager	   m_SoundManager;
 	LevelManager	   m_LevelManager;
 	sf::VertexArray	   m_VertexArrayLevel;
 	const sf::Texture& m_TextureTiles;
 	int** m_ArrayLevel = NULL;
+
+	sf::Shader m_RippleShader;
 
 	const int TILE_SIZE			= 50;
 	const int VERTICES_PER_TILE = 6;

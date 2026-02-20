@@ -51,16 +51,18 @@ bool Engine::detectCollisions(PlayableCharacter& character)
 				character.spawn(m_LevelManager.getStartPosition(), GRAVITY);
 				if (BLOCK_INDEX == 2)
 				{
-					// lava sound
 					m_SoundManager.playFallInFire();
 				}
 				else
 				{
-					// water sound
 					m_SoundManager.playFallInWater();
 				}
-
 				continue;
+			}
+
+			if (isWaterOrLava && character.getFeetBounds().findIntersection(block) && !m_ParticleSystem.isRunning())
+			{
+				m_ParticleSystem.emitParticles(character.getCenter());
 			}
 
 			bool isSolid = BLOCK_INDEX == 1;
